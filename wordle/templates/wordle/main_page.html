@@ -1,0 +1,241 @@
+{% load bootstrap5 %}
+
+{% load static %}
+
+<!DOCTYPE HTML>
+<html lang="fa">
+
+  <head>
+    <meta charset="utf-8">
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+    
+    <title>وردل</title>
+
+    <style>
+      #top_title {
+          padding-bottom: 25px;
+          border-bottom-style:dashed;
+          border-bottom-width: thick;
+          border-color: #ffffff;
+        }
+      
+      #help_button {
+        float: right;
+        background-color: #140e0e;
+        border-color: #ffffff;
+        border-radius: 100px;
+      }
+
+      #reload_button {
+        float: right;
+        background-color: #140e0e;
+        border-color: #ffffff;
+        border-radius: 100px;
+      }
+
+      input {
+        background-color: #140e0e;
+        border-color: #ffffff;
+        text-align: center;
+        border-radius: 1px;
+        margin-bottom: 10px;
+        size: 100px;
+        font-size: 50px;
+        width: 80px;
+        height: 80px;
+        color: beige;
+        
+      }
+
+      #example1, #example2, #example3, #example4, #example5, #example6 {
+        background-color: #140e0e;
+        border-color: #ffffff;
+        text-align: center;
+        font-size: x-large;
+        border-radius: 1px;
+        margin-bottom: 10px;
+        size: 100px;
+        width: 50px;
+        height: 50px;
+        color: beige;
+        
+      }
+
+    </style>
+
+    </head>
+
+  <body style="background-color: #140e0e;">
+
+    <div style="text-align: center;">
+      <h1 id="header"><span type="text" style="color: whitesmoke; margin-bottom: 1px; font-size:xx-large;">وردل فارسی</span></h1>
+    </div>
+
+    <br></br>
+
+    <div id="top_title">
+
+      <h2 id="gameCounter" style="color: whitesmoke;" > 
+        
+        <div style="text-align: center">
+        <!--Game status part, containing detalis about number of wins and number of played games-->
+        
+        <button style="float: left; " type="link" onclick="openTwitter();" id="help_button" class="btn-lg">
+          <img src="{% static 'media/twitter.svg' %}" width="40px" height="40px">
+        </button>
+
+        
+
+        <button style="float: left;" onclick="reloadPage();" id="reload_button" class="btn-lg">
+          <img src="{% static 'media/retry.png' %}" width="40px" height="40px">
+        </button>
+
+
+        <span id="gameSatus"> <span style="color:lightgreen;">بازی</span> &larr; </span><span id="gameCount">0</span>
+        &nbsp;
+        <span id="winStatus">&nbsp; <span style="color: greenyellow;">برد</span> &larr; </span><span id="winCount">0</span>
+        
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        <!-- Button trigger modal -->
+        <button type="button" id="help_button" class="btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          <span style="color: #ffffff; font-size: xx-large;">&quest;</span>
+        </button>
+
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" style="direction: rtl;" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              
+              <div class="modal-header" style="color: #140e0e;">
+                <p class="modal-title" id="staticBackdropLabel">با حداکثر 6 تلاش، کلمه مورد نظر حدس بزن🔍🧐</p>
+              </div>
+              
+              <div class="modal-body" style="color: #140e0e;">
+                <div class="gameDefinition" style="font-size: medium;">
+                  <p class="mb-3">
+                  بعد از هر حدس تغییر رنگ کاشی ها بهت میگه چقدر به کلمه درست نزدیک بودی
+                  </p>
+                  <p class="mb-2">
+                  مثال:
+                </p>
+                </div>
+
+                <form id="input_example" id="form1" style="direction: rtl; margin: auto; text-align: right;">
+                  <input type="text" id="example1" minlength="1" maxlength="1"  disabled value="خ" style="background-color: green;">
+                  <input type="text" id="example2" minlength="1" maxlength="1"  disabled value="س">
+                  <input type="text" id="example3" minlength="1" maxlength="1"  disabled value="ا">
+                  <input type="text" id="example4" minlength="1" maxlength="1"  disabled value="ر">
+                  <input type="text" id="example5" minlength="1" maxlength="1"  disabled value="ت">
+                </form>
+
+                <p class="mb-4" style="font-size: medium;">
+                  حرف (خ) هم در کلمه موردنظر هست و هم در جای صحیح قرار گرفته
+                </p>
+
+                <form id="input_example" id="form1" style="direction: rtl; margin: auto; text-align: right;">
+                  <input type="text" id="example1" minlength="1" maxlength="1"  disabled value="م">
+                  <input type="text" id="example2" minlength="1" maxlength="1"  disabled value="ظ" style="background-color: #dca800;">
+                  <input type="text" id="example3" minlength="1" maxlength="1"  disabled value="ن">
+                  <input type="text" id="example4" minlength="1" maxlength="1"  disabled value="و">
+                  <input type="text" id="example5" minlength="1" maxlength="1"  disabled value="ن">
+                </form>
+
+                <p class="mb-4" style="font-size: medium;">
+                  حرف (ظ) در کلمه موردنظر هست اما در جای غلط قرار گرفته
+                </p>
+
+                <form id="input_example" id="form1" style="direction: rtl; margin: auto; text-align: right;">
+                  <input type="text" id="example1" minlength="1" maxlength="1"  disabled value="پ">
+                  <input type="text" id="example2" minlength="1" maxlength="1"  disabled value="ی">
+                  <input type="text" id="example3" minlength="1" maxlength="1"  disabled value="و">
+                  <input type="text" id="example4" minlength="1" maxlength="1"  disabled value="ن">
+                  <input type="text" id="example5" minlength="1" maxlength="1"  disabled value="د">
+                </form>
+
+                <p style="font-size: medium;" class="mb-4" >
+                  هیچ یک از حروف وارد شده در کلمه موردنظر وجود ندارند
+                </p>
+
+                <p style="font-size: medium; font: bold;">
+                  (حتما از حروف فارسی برای پر کردن خونه ها استفاده کن، تا حروفی که وارد میکنی غیب نشن 🧙🏻‍♂️ )
+                </p>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">متوجه شدم</button>
+              </div>
+            </div>
+          </div>
+        </div>
+                
+
+      </h2>
+
+    </div>
+
+    <br></br>
+      
+    <form id="form1" style="direction: rtl; margin: auto; text-align: center;">
+      <input type="text" id="letter1" minlength="1" maxlength="1"  onkeyup="jumpOneInput(this, 'letter2')">
+      <input type="text" id="letter2" minlength="1" maxlength="1"  disabled  onkeyup="jumpOneInput(this, 'letter3')">
+      <input type="text" id="letter3" minlength="1" maxlength="1"  disabled  onkeyup="jumpOneInput(this, 'letter4')">
+      <input type="text" id="letter4" minlength="1" maxlength="1"  disabled  onkeyup="jumpOneInput(this, 'letter5')">
+      <input type="text" id="letter5" minlength="1" maxlength="1"  disabled  onkeyup="showLetterResult(1, 5); jumpOneInput(this, 'letter6')">
+    </form>
+      
+    <form id="form2" style="direction: rtl; margin: auto; text-align: center;">
+      <input type="text" id="letter6" minlength="1" maxlength="1"  disabled  onkeyup="jumpOneInput(this, 'letter7')">
+      <input type="text" id="letter7" minlength="1" maxlength="1"  disabled  onkeyup="jumpOneInput(this, 'letter8')">
+      <input type="text" id="letter8" minlength="1" maxlength="1"  disabled  onkeyup="jumpOneInput(this, 'letter9')">
+      <input type="text" id="letter9" minlength="1" maxlength="1"  disabled  onkeyup="jumpOneInput(this, 'letter10')">
+      <input type="text" id="letter10" minlength="1" maxlength="1" disabled   onkeyup="showLetterResult(6, 10); jumpOneInput(this, 'letter11')">
+    </form>  
+
+    <form id="form3" style="direction: rtl; margin: auto; text-align: center;">
+      <input type="text" id="letter11" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter12')">
+      <input type="text" id="letter12" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter13')">
+      <input type="text" id="letter13" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter14')">
+      <input type="text" id="letter14" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter15')">
+      <input type="text" id="letter15" minlength="1" maxlength="1" disabled   onkeyup="showLetterResult(11, 15); jumpOneInput(this, 'letter16')">
+    </form>  
+
+    <form id="form4" style="direction: rtl; margin: auto; text-align: center;">
+      <input type="text" id="letter16" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter17')">
+      <input type="text" id="letter17" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter18')">
+      <input type="text" id="letter18" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter19')">
+      <input type="text" id="letter19" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter20')">
+      <input type="text" id="letter20" minlength="1" maxlength="1" disabled   onkeyup="showLetterResult(16, 20); jumpOneInput(this, 'letter21') ">
+    </form>  
+
+    <form id="form5" style="direction: rtl; margin: auto; text-align: center;">
+      <input type="text" id="letter21" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter22')">
+      <input type="text" id="letter22" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter23')">
+      <input type="text" id="letter23" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter24')">
+      <input type="text" id="letter24" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter25')">
+      <input type="text" id="letter25" minlength="1" maxlength="1" disabled   onkeyup="showLetterResult(21, 25); jumpOneInput(this, 'letter26')">
+    </form>
+
+    <form id="form6" style="direction: rtl; margin: auto; text-align: center;">
+      <input type="text" id="letter26" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter27')">
+      <input type="text" id="letter27" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter28')">
+      <input type="text" id="letter28" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter29')">
+      <input type="text" id="letter29" minlength="1" maxlength="1" disabled   onkeyup="jumpOneInput(this, 'letter30')">
+      <input type="text" id="letter30" minlength="1" maxlength="1" disabled   onkeyup="showLetterResult(26, 30)">
+    </form>  
+
+    <script src="{% static 'js/js_functionality.js' %}"></script>
+
+  </body>
+
+</html>
